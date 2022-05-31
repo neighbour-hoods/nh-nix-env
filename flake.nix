@@ -51,9 +51,12 @@
       in
 
       {
-        packages = {
+        shells = {
 
-          holochainDevShell = pkgs.mkShell {
+          holochainDevShell = {
+            extraBuildInputs ? [],
+          }:
+          pkgs.mkShell {
             inputsFrom = [
               holonixMain.main
             ];
@@ -62,13 +65,11 @@
               holonixMain.pkgs.binaryen
             ] ++ (with pkgs; [
               miniserve
-              nodePackages.rollup
-              wasm-pack
               # cargo2nix.defaultPackage.${system}
               (rust-bin.stable.${rustVersion}.default.override {
                 targets = [ wasmTarget ];
               })
-            ]);
+            ]) ++ extraBuildInputs;
 
             shellHook = ''
               export CARGO_HOME=~/.cargo
@@ -76,11 +77,13 @@
             '';
           };
 
-          rustDevShell = pkgs.mkShell {
+          rustDevShell = {
+            extraBuildInputs ? [],
+          }: pkgs.mkShell {
             buildInputs = [
               pkgs.rust-bin.stable.${rustVersion}.default
               cargo2nix.defaultPackage.${system}
-            ];
+            ] ++ extraBuildInputs;
           };
 
         };
