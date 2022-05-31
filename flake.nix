@@ -33,7 +33,7 @@
 
     {
       metavalues = {
-        inherit holonixMain rustVersion flake-utils naersk nh-supported-systems;
+        inherit holonixMain rustVersion flake-utils naersk nh-supported-systems wasmTarget;
       };
     }
 
