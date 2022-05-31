@@ -31,6 +31,14 @@
       };
     in
 
+    {
+      metavalues = {
+        inherit holonixMain rustVersion flake-utils naersk nh-supported-systems;
+      };
+    }
+
+    //
+
     flake-utils.lib.eachSystem nh-supported-systems (system:
       let
         pkgs = import nixpkgs {
@@ -78,7 +86,7 @@
         };
 
         values = {
-          inherit pkgs holonixMain rustVersion flake-utils naersk nh-supported-systems;
+          inherit pkgs;
         };
 
       });
