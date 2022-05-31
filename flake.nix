@@ -16,15 +16,23 @@
   };
 
   outputs = { nixpkgs, flake-utils, holonix, rust-overlay, cargo2nix, naersk, ... }:
-    flake-utils.lib.eachSystem ["x86_64-linux" "aarch64-linux" "x86_64-darwin"] (system:
-      let
-        holonixMain = import holonix {
-          holochainVersionId = "v0_0_139";
-          include = {
-            rust = false;
-          };
-        };
+    let
+      nh-supported-systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin"];
 
+      rustVersion = "1.60.0";
+
+      wasmTarget = "wasm32-unknown-unknown";
+
+      holonixMain = import holonix {
+        holochainVersionId = "v0_0_139";
+        include = {
+          rust = false;
+        };
+      };
+    in
+
+    flake-utils.lib.eachSystem nh-supported-systems (system:
+      let
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
@@ -32,11 +40,6 @@
             cargo2nix.overlay
           ];
         };
-
-        rustVersion = "1.60.0";
-
-        wasmTarget = "wasm32-unknown-unknown";
-
       in
 
       {
@@ -72,10 +75,10 @@
             ];
           };
 
-          values = {
-            inherit pkgs holonixMain rustVersion;
-          };
+        };
 
+        values = {
+          inherit pkgs holonixMain rustVersion flake-utils naersk nh-supported-systems;
         };
 
       });
