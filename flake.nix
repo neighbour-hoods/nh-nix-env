@@ -24,7 +24,7 @@
       wasmTarget = "wasm32-unknown-unknown";
 
       holonixMain = import holonix {
-        holochainVersionId = "v0_0_139";
+        holochainVersionId = "v0_0_143";
         include = {
           rust = false;
         };
