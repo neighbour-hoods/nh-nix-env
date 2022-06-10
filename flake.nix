@@ -67,6 +67,7 @@
               miniserve
               # cargo2nix.defaultPackage.${system}
               (rust-bin.stable.${rustVersion}.default.override {
+                extensions = ["rust-src"];
                 targets = [ wasmTarget ];
               })
             ]) ++ extraBuildInputs;
