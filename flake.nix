@@ -19,7 +19,7 @@
     let
       nh-supported-systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin"];
 
-      rustVersion = "1.60.0";
+      rustVersion = "1.61.0";
 
       wasmTarget = "wasm32-unknown-unknown";
 
