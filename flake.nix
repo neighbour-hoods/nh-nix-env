@@ -83,7 +83,10 @@
             extraBuildInputs ? [],
           }: pkgs.mkShell {
             buildInputs = [
-              pkgs.rust-bin.stable.${rustVersion}.default
+              (pkgs.rust-bin.stable.${rustVersion}.default.override {
+                extensions = ["rust-src"];
+                targets = [ wasmTarget ];
+              })
               cargo2nix.defaultPackage.${system}
             ] ++ extraBuildInputs;
           };
