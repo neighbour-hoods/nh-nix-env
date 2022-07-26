@@ -55,6 +55,7 @@
 
           holochainDevShell = {
             extraBuildInputs ? [],
+            LD_LIBRARY_PATH ? null,
           }:
           pkgs.mkShell {
             inputsFrom = [
@@ -77,6 +78,8 @@
               export CARGO_HOME=~/.cargo
               export CARGO_TARGET_DIR=target
             '';
+
+            inherit LD_LIBRARY_PATH;
           };
 
           rustDevShell = {
