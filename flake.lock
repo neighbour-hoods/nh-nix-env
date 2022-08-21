@@ -101,11 +101,11 @@
     "holonix": {
       "flake": false,
       "locked": {
-        "lastModified": 1654758726,
-        "narHash": "sha256-m+FasCc2ea7ZiIkHbKf3V50RNvomUvnq8sCpSZ5XLa8=",
+        "lastModified": 1661065791,
+        "narHash": "sha256-GiHWPx21VDoewRNbtLcinR4VYUB1+YiwHdweJS6E9Tw=",
         "owner": "holochain",
         "repo": "holonix",
-        "rev": "2b874668324ae5a7804066f61afbed913ac0cb9c",
+        "rev": "00bb08beb3738940e17640ec57f495ec5d96651d",
         "type": "github"
       },
       "original": {
