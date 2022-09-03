@@ -29,6 +29,17 @@
           rust = false;
         };
       };
+
+      holonixMainRunOnly = import holonix {
+        holochainVersionId = "v0_0_143";
+        include = {
+          rust = false;
+          git = false;
+          linux = false;
+          docs = false;
+          niv = false;
+        };
+      };
     in
 
     {
@@ -80,6 +91,16 @@
             '';
 
             inherit LD_LIBRARY_PATH;
+          };
+
+          holochainRunShell = {
+            extraBuildInputs ? [],
+          }: pkgs.mkShell {
+            inputsFrom = [
+              holonixMainRunOnly.main
+            ];
+
+            buildInputs = extraBuildInputs;
           };
 
           rustDevShell = {
